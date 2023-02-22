@@ -5,7 +5,7 @@ import {useEffect, useRef, useState} from 'react'
 export default function Home() {
     const topic = 'python'
     const [connectStatus, setConnectStatus] = useState('Connecting...')
-    const url = 'ws://broker.emqx.io:8083/mqtt'
+    const url = 'wss://broker.emqx.io:8084/mqtt'
     const options = {}
     const client = useRef(null)
     useEffect(() => {
