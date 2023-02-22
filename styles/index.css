@@ -1,0 +1,73 @@
+/*.container {*/
+/*    max-width: 800px;*/
+/*    margin: 0 auto;*/
+/*    padding: 32px;*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*    background-color: #fff;*/
+/*}*/
+
+h1 {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.All-contain {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.Samsung-415 {
+    width: 30%;
+    background-color: #f7f7f7;
+    padding: 16px;
+    margin-bottom: 32px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Remote-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Remote-btn p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.btn {
+    border: none;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.btn-success {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+.btn-dark {
+    background-color: #34495e;
+    color: #fff;
+}
+
