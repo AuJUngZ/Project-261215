@@ -21,7 +21,7 @@ export default function Home() {
             });
             client.current.on("error", (err) => {
                 setConnectStatus("Error");
-                console.log(err);
+                
             });
             client.current.on("reconnect", () => {
                 setConnectStatus("Reconnecting");
