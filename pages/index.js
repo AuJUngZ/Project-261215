@@ -70,7 +70,7 @@ export default function Home() {
             <div className="All-contain d-flex justify-content-center gap-5">
                 <div className="Samsung-415 block">
                     <div className="Remote-btn">
-                        <p>Room 415 (SM {SamsungStatus})</p>
+                        <p>Room 412 (LG {LGStatus})</p>
                         <button
                             className="btn btn-danger m-2"
                             onClick={() => {
@@ -119,7 +119,7 @@ export default function Home() {
                 </div>
                 <div className="Samsung-415">
                     <div className="Remote-btn">
-                        <p>Room 412 (LG {LGStatus})</p>
+                        <p>Room 415 (SM {SamsungStatus})</p>
                         <button
                             className="btn btn-danger m-2"
                             onClick={() => {
