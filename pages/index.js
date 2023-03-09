@@ -48,7 +48,7 @@ export default function Home() {
                 }
             });
 
-            client.current.public(topic_LG, "status");
+            client.current.publish(topic_LG, "status");
             return () => {
                 setConnection(true);
             }
