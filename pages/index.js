@@ -21,7 +21,7 @@ export default function Home() {
             });
             client.current.on("error", (err) => {
                 setConnectStatus("Error");
-                
+
             });
             client.current.on("reconnect", () => {
                 setConnectStatus("Reconnecting");
@@ -42,18 +42,24 @@ export default function Home() {
 
             //check connection of ESP32 Samsung
             client.current.subscribe(topic_Samsung);
+            client.current.subscribe(topic_LG);
             client.current.on("message", (topic, message) => {
                 if (topic === topic_Samsung) {
+                    updateStatusLG(message.toString());
+                }
+                if(topic === topic_LG){
                     updateStatusLG(message.toString());
                 }
             });
 
             client.current.publish(topic_LG, "status");
+            client.current.publish(topic_Samsung, "status");
             return () => {
                 setConnection(true);
             }
         }
     }, []);
+
     const updateStatusLG = (message) => {
         if (message === "connected") {
             setLGStatus("Connected");
@@ -67,114 +73,116 @@ export default function Home() {
     }
 
     return (<div className="container">
-            <h1 className="text-center m-2">Remote control</h1>
-            <div className="All-contain d-flex justify-content-center gap-5">
-                <div className="Samsung-415 block">
-                    <div className="Remote-btn">
-                        <p>Room 412 (LG {LGStatus})</p>
-                        <button
-                            className="btn btn-danger m-2"
-                            onClick={() => {
-                                publish(topic_LG, "toggle");
-                            }}
-                        >
-                            Power
-                        </button>
-                        <button
-                            className="btn btn-primary m-2"
-                            onClick={() => {
-                                publish(topic_LG, "vol_up");
-                            }}
-                        >
-                            Volume Up
-                        </button>
-                        <button
-                            className="btn btn-success m-2"
-                            onClick={() => {
-                                publish(topic_LG, "vol_down");
-                            }}
-                        >
-                            volume Down
-                        </button>
-                        <button
-                            className="btn btn-dark m-2"
-                            onClick={() => {
-                                publish(topic_LG, "mute");
-                            }}
-                        >
-                            Mute
-                        </button>
-                        <button className="btn btn-warning m-2" onClick={() => {
-                            publish(topic_LG, "hdmi1");
-                        }}>Switch HDMI 1
-                        </button>
-                        <button className="btn btn-secondary m-2" onClick={() => {
-                            publish(topic_LG, "hdmi2");
-                        }}>Switch to HDMI 2
-                        </button>
-                        <button className="btn btn-primary m-2" onClick={() => {
-                            publish(topic_LG, "av");
-                        }}>Switch to AV
-                        </button>
-                    </div>
-                </div>
-                <div className="Samsung-415">
-                    <div className="Remote-btn">
-                        <p>Room 415 (SM {SamsungStatus})</p>
-                        <button
-                            className="btn btn-danger m-2"
-                            onClick={() => {
-                                publish(topic_Samsung, "toggle");
-                            }}
-                        >
-                            Power
-                        </button>
-                        <button
-                            className="btn btn-primary m-2"
-                            onClick={() => {
-                                publish(topic_Samsung, "vol_up");
-                            }}
-                        >
-                            Volume Up
-                        </button>
-                        <button
-                            className="btn btn-success m-2"
-                            onClick={() => {
-                                publish(topic_Samsung, "vol_down");
-                            }}
-                        >
-                            volume Down
-                        </button>
-                        <button
-                            className="btn btn-dark m-2"
-                            onClick={() => {
-                                publish(topic_Samsung, "mute");
-                            }}
-                        >
-                            Mute
-                        </button>
-                        <button className="btn btn-warning m-2" onClick={() => {
-                            publish(topic_Samsung, "hdmi1");
-                        }}>Switch HDMI 1
-                        </button>
-                        <button className="btn btn-secondary m-2" onClick={() => {
-                            publish(topic_Samsung, "hdmi2");
+        <h1 className="text-center m-2">Remote control</h1>
+        {/*<button className="btn btn-dark">Update Status of ESP32 Connection</button>*/}
+        <div className="All-contain d-flex justify-content-center gap-5">
+            <div className="Samsung-415 block">
+                <div className="Remote-btn">
+                    <p>Room 412 (LG {LGStatus})</p>
+                    <button
+                        className="btn btn-danger m-2"
+                        onClick={() => {
+                            publish(topic_LG, "toggle");
                         }}
-                        >Switch to HDMI 2
-                        </button>
-                        <button className="btn btn-primary m-2" onClick={() => {
-                            publish(topic_Samsung, "av");
-                        }}>Switch to AV
-                        </button>
-                    </div>
+                    >
+                        Power
+                    </button>
+                    <button
+                        className="btn btn-primary m-2"
+                        onClick={() => {
+                            publish(topic_LG, "vol_up");
+                        }}
+                    >
+                        Volume Up
+                    </button>
+                    <button
+                        className="btn btn-success m-2"
+                        onClick={() => {
+                            publish(topic_LG, "vol_down");
+                        }}
+                    >
+                        volume Down
+                    </button>
+                    <button
+                        className="btn btn-dark m-2"
+                        onClick={() => {
+                            publish(topic_LG, "mute");
+                        }}
+                    >
+                        Mute
+                    </button>
+                    <button className="btn btn-warning m-2" onClick={() => {
+                        publish(topic_LG, "hdmi1");
+                    }}>Switch HDMI 1
+                    </button>
+                    <button className="btn btn-secondary m-2" onClick={() => {
+                        publish(topic_LG, "hdmi2");
+                    }}>Switch to HDMI 2
+                    </button>
+                    <button className="btn btn-primary m-2" onClick={() => {
+                        publish(topic_LG, "av");
+                    }}>Switch to AV
+                    </button>
                 </div>
-                {/*    show mqtt connection status*/}
             </div>
-            <h3 className="text-center">MQTT connection Status : {connectStatus}</h3>
-            <footer>
-                <p className="text-center">
-                    ©Copyright <Link href="/">Group5</Link>
-                </p>
-            </footer>
-        </div>);
+            <div className="Samsung-415">
+                <div className="Remote-btn">
+                    <p>Room 415 (SM {SamsungStatus})</p>
+                    <button
+                        className="btn btn-danger m-2"
+                        onClick={() => {
+                            publish(topic_Samsung, "toggle");
+                        }}
+                    >
+                        Power
+                    </button>
+                    <button
+                        className="btn btn-primary m-2"
+                        onClick={() => {
+                            publish(topic_Samsung, "vol_up");
+                        }}
+                    >
+                        Volume Up
+                    </button>
+                    <button
+                        className="btn btn-success m-2"
+                        onClick={() => {
+                            publish(topic_Samsung, "vol_down");
+                        }}
+                    >
+                        volume Down
+                    </button>
+                    <button
+                        className="btn btn-dark m-2"
+                        onClick={() => {
+                            publish(topic_Samsung, "mute");
+                        }}
+                    >
+                        Mute
+                    </button>
+                    <button className="btn btn-warning m-2" onClick={() => {
+                        publish(topic_Samsung, "hdmi1");
+                    }}>Switch HDMI 1
+                    </button>
+                    <button className="btn btn-secondary m-2" onClick={() => {
+                        publish(topic_Samsung, "hdmi2");
+                    }}
+                    >Switch to HDMI 2
+                    </button>
+                    <button className="btn btn-primary m-2" onClick={() => {
+                        publish(topic_Samsung, "av");
+                    }}>Switch to AV
+                    </button>
+                </div>
+            </div>
+            {/*    show mqtt connection status*/}
+        </div>
+        <h3 className="text-center">MQTT connection Status : {connectStatus}</h3>
+        <button className="btn btn-dark">Update Status of ESP32 Connection</button>
+        <footer>
+            <p className="text-center">
+                ©Copyright <Link href="/">Group5</Link>
+            </p>
+        </footer>
+    </div>);
 }
