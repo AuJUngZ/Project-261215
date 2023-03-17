@@ -61,8 +61,14 @@ export default function Home() {
     }, []);
 
     const updateStatusLG = (message) => {
-        if(message !== "Disconnected" && message !== ""){
+        if(message === "Connected" || message === "toggle" || message === "vol_up" || message === "vol_down" || message === "mute" || message === "hdmi1" || message === "hdmi2" || message === "av") {
             setLGStatus("Connected");
+        }
+    }
+
+    const updateStatusSamsung = (message) => {
+        if(message === "Connected" || message === "toggle" || message === "vol_up" || message === "vol_down" || message === "mute" || message === "hdmi1" || message === "hdmi2" || message === "av") {
+            setSamsungStatus("Connected");
         }
     }
 
