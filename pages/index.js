@@ -61,10 +61,8 @@ export default function Home() {
     }, []);
 
     const updateStatusLG = (message) => {
-        if (message === "connected") {
+        if(message !== "Disconnected"){
             setLGStatus("Connected");
-        } else {
-            setLGStatus("Disconnected");
         }
     }
 
