@@ -51,7 +51,6 @@ export default function Home() {
                     updateStatusLG(message.toString());
                 }
             });
-
             client.current.publish(topic_LG, "status");
             client.current.publish(topic_Samsung, "status");
             return () => {
@@ -59,6 +58,11 @@ export default function Home() {
             }
         }
     }, []);
+
+    const checkESP32 = () => {
+        client.current.publish(topic_LG, "status");
+        client.current.publish(topic_Samsung, "status");
+    }
 
     const updateStatusLG = (message) => {
         if(message === "Connected" || message === "toggle" || message === "vol_up" || message === "vol_down" || message === "mute" || message === "hdmi1" || message === "hdmi2" || message === "av") {
@@ -182,7 +186,7 @@ export default function Home() {
             {/*    show mqtt connection status*/}
         </div>
         <h3 className="text-center">MQTT connection Status : {connectStatus}</h3>
-        <button className="btn btn-dark">Update Status of ESP32 Connection</button>
+        <button className="btn btn-dark" onClick={() => checkESP32()}>Update Status of ESP32 Connection</button>
         <footer>
             <p className="text-center">
                 ©Copyright <Link href="/">Group5</Link>
